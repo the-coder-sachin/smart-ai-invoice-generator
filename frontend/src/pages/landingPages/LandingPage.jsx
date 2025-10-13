@@ -1,0 +1,23 @@
+import Faqs from "../../components/landing/Faqs";
+import Features from "../../components/landing/Features";
+import Footer from "../../components/landing/Footer";
+import Header from "../../components/landing/Header";
+import Hero from "../../components/landing/HEro";
+import Testimonials from "../../components/landing/Testimonials";
+
+const LandingPage = () => {
+  return (
+    <>
+      <Header />
+      <main>
+        <Hero />
+        <Features />
+        <Testimonials />
+        <Faqs />
+        <Footer />
+      </main>
+    </>
+  );
+};
+
+export default LandingPage;

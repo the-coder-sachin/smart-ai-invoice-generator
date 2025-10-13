@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Abel&family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&family=Inter:opsz@14..32&family=Michroma&display=swap');
+@import "tailwindcss";
+
+body {
+font-family: "inter", monospace;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+/* Apply to body or specific container */
+::-webkit-scrollbar {
+    width: 8px;
+    /* or 6px for thinner scrollbar */
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+    /* Can also use rgba or a light gray */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(100, 116, 139, 0.6);
+    /* Slate-500 with opacity */
+    border-radius: 10px;
+    border: 2px solid transparent;
+    /* Optional: creates padding effect */
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(100, 116, 139, 0.8);
+    /* Slightly darker on hover */
+}
+
+body {
+    scrollbar-width: thin;
+    /* For Firefox */
+    scrollbar-color: #94a3b8 transparent;
+    /* For Firefox */
+    overflow: auto;
+}
+
+.my-scrollable-div {
+    overflow-y: auto;
+    max-height: 400px;
+}
+
