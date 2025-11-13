@@ -105,7 +105,7 @@ export const getInvoiceById = async (req, res) => {
     const invoice = await Invoice.findOne({
       _id: req.params.id,
       user: req.user.id,
-    });
+    }).populate("user", "name email");
 
     if (!invoice) {
       return res.status(404).json({
@@ -113,6 +113,16 @@ export const getInvoiceById = async (req, res) => {
         message: "Invoice not found",
         data: null,
       });
+    }
+    
+    // check if user is authorized to access the invoice
+    if(invoice.user.toString !== req.user.id){
+        return res.status(404).json({
+        success: false,
+        message: "Not authorized",
+        data: null,
+        });
+
     }
 
     res.status(200).json({
