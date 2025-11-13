@@ -3,19 +3,16 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ProfileDropDown from "../layout/ProfileDropDown";
 import Button from "../../ui/Button";
+import { useAuth } from "../../context/AuthContext";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const isAuthenticated = true;
+  const { isAuthenticated, user, logout } = useAuth();
   const navigate = useNavigate();
   const [isProfileDropdownOpen, setIsProfileDropDownOpen] = useState(false);
   const profileDropDown = useRef(null);
   const menuRef = useRef(null);
-
-  const user = { name: "alex", email: "alex21@gmail.com" };
-
-  const logout = () => {};
 
   useEffect(() => {
     const handleScroll = () => {
@@ -89,7 +86,7 @@ const Header = () => {
               FAQ
             </a>
           </div>
-          <div className="hidden lg:flex space-x-4 items-center relative">
+          <div className="mr-7 flex space-x-4 items-center relative">
             {isAuthenticated ? (
               <div ref={profileDropDown}>
                 <ProfileDropDown

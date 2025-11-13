@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 const Hero = () => {
-  const isAuthenticated = false;
+  const {isAuthenticated} = useAuth();
   return (
     <section className="relative bg-sky-50 overflow-hidden">
       <div className="absolute inset-0 bg-grid-white/[0.5] bg-[size:60px_60px]"></div>
@@ -40,9 +41,9 @@ const Hero = () => {
             </a>
           </div>
         </div>
-        <div className="mt-12 sm:mt-16 relative max-w-5xl mx-auto">
+        <div className="mt-12 sm:mt-22 relative max-w-5xl mx-auto">
           <img
-            src="https://images.pexels.com/photos/25745095/pexels-photo-25745095.jpeg"
+            src="https://images.pexels.com/photos/8962519/pexels-photo-8962519.jpeg"
             alt="Smart Invoicing ScreenShot"
             className="rounded-2xl shadow-2xl border-4 border-gray-200/20"
           />

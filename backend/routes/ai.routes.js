@@ -9,7 +9,7 @@ import {
 const router = express.Router();
 
 router.post("/parse-text", protect, parseInvoiceFromText);
-router.post("/generate-reminder/:id", protect, getReminderEmail);
+router.post("/generate-reminder/", protect, getReminderEmail);
 router.get("/dashboard-summary", protect, getDashboardSummary);
 
 export default router;

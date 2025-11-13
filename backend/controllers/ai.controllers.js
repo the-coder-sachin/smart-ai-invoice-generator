@@ -71,7 +71,7 @@ export const parseInvoiceFromText = async (req, res) => {
 };
 
 export const getReminderEmail = async (req, res) => {
-  const invoiceId = req.params.id;
+  const invoiceId = req.body.invoiceId;
 
   if (!invoiceId) return res.status(400).json({ error: "Missing 'invoiceId'" });
 
@@ -103,11 +103,7 @@ export const getReminderEmail = async (req, res) => {
     });
 
     res.status(200).json({
-      success: true,
-      message: "Email generated successfuly",
-      data: {
         reminderText: response.text,
-      },
     });
   } catch (err) {
     console.error("Email generation error:", err);
@@ -178,9 +174,7 @@ export const getDashboardSummary = async (req, res) => {
 
     if (!response) {
       return res.status(400).json({
-        success: false,
         message: "Unable to generate summary!",
-        data: null,
       });
     }
 

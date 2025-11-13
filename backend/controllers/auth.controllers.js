@@ -36,14 +36,10 @@ export const registerUser = async (req, res) => {
     const newUser = await User.create({ name, email, password });
 
     return res.status(201).json({
-      success: true,
-      message: "User registered successfully",
-      data: {
         id: newUser._id,
         name: newUser.name,
         email: newUser.email,
         token: generateToken(newUser._id),
-      },
     });
   } catch (error) {
     console.error("User Registration Error:", error.message);
@@ -83,9 +79,6 @@ export const loginUser = async (req, res) => {
     }
 
     return res.status(200).json({
-      success: true,
-      message: "Login successful.",
-      data: {
         id: user._id,
         name: user.name,
         email: user.email,
@@ -93,7 +86,6 @@ export const loginUser = async (req, res) => {
         businessName: user.businessName || "",
         address: user.address || "",
         phone: user.phone || "",
-      },
     });
   } catch (error) {
     console.error("Login error:", error.message);
@@ -122,9 +114,6 @@ export const getUser = async (req, res) => {
     }
 
     res.status(200).json({
-      success: true,
-      message: "User fetched successfully.",
-      data: {
         id: user._id,
         name: user.name,
         email: user.email,
@@ -132,7 +121,6 @@ export const getUser = async (req, res) => {
         businessName: user.businessName || "",
         address: user.address || "",
         phone: user.phone || "",
-      },
     });
   } catch (error) {
     console.error("Error fetching user:", error);
@@ -168,14 +156,10 @@ export const updateUser = async (req, res) => {
     const updatedUser = await user.save();
 
     res.status(200).json({
-      success: true,
-      message: "User updated successfully",
-      data: {
         name: updatedUser.name,
         businessName: updatedUser.businessName,
         address: updatedUser.address,
         phone: updatedUser.phone,
-      },
     });
   } catch (error) {
     console.error("Error updating user:", error);
