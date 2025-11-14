@@ -115,10 +115,10 @@ export const getDashboardSummary = async (req, res) => {
   try {
     const invoices = await Invoice.find({ user: req.user.id });
 
-    if (!invoices || !Array.isArray(invoices) || invoices.length === 0) {
+    if (!invoices || !Array.isArray(invoices) || invoices.length === 0) {    
       return res
         .status(400)
-        .json({ error: "Invalid or missing 'invoices' array in request body" });
+        .json({ message: "Invalid or missing 'invoices' array in request body" });
     }
 
     const totalInvoices = invoices.length;
