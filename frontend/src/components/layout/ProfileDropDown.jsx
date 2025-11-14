@@ -25,10 +25,16 @@ const ProfileDropDown = ({
               className="h-9 w-9 object-cover rounded-xl"
             />
           </>
-        ) : (
+        ) : companyName ? (
           <div className="h-8 w-8 bg-gradient-to-br from-blue-950 to-blue-800 flex items-center justify-center rounded-xl">
             <span className="text-sm text-white font-semibold">
               {companyName.charAt(0).toUpperCase()}
+            </span>
+          </div>
+        ) : (
+          <div className="h-8 w-8 bg-gradient-to-br from-blue-950 to-blue-800 flex items-center justify-center rounded-xl">
+            <span className="text-sm text-white font-semibold">
+              {email.charAt(0).toUpperCase()}
             </span>
           </div>
         )}
