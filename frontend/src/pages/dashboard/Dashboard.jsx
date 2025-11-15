@@ -6,6 +6,7 @@ import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import Button from "../../ui/Button";
 import AiInsightCard from "../../ui/AiInsightCard";
+import moment from "moment";
 
 const Dashboard = () => {
   const [stats, setStats] = useState({

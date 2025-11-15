@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Briefcase, LogOut, Menu, X } from "lucide-react";
-import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import ProfileDropDown from "../../components/layout/ProfileDropDown";
 import { useAuth } from "../../context/AuthContext";
 import { NAVIGATION_MENU } from "../../utils/data";
+import { BASE_URL } from "../../utils/apiPaths";
 
 const NavigationItem = ({ item, isActive, onClick, isCollapsed }) => {
   const Icon = item.icon;
@@ -29,6 +30,7 @@ const NavigationItem = ({ item, isActive, onClick, isCollapsed }) => {
 const DashboardLayout = ({ children, activeMenu }) => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeNavItem, setActiveNavItem] = useState(activeMenu || "dashboard");
@@ -101,7 +103,7 @@ const DashboardLayout = ({ children, activeMenu }) => {
                 <Briefcase className="w-5 h-5 text-white" />
               </div>
               {!sidebarCollapsed && (
-                <span className="text-gray-900 font-bold text-xl">
+                <span className="text-gray-900 font-bold text-xl" onClick={()=>navigate(`/`)}>
                   Ai Invoice app
                 </span>
               )}
@@ -113,7 +115,7 @@ const DashboardLayout = ({ children, activeMenu }) => {
               <NavigationItem
                 key={item.id}
                 item={item}
-                isActive={activeNavItem === item.id}
+                isActive={location.pathname === `/${item.id}`}
                 onClick={handleNavigation}
                 isCollapsed={sidebarCollapsed}
               />
