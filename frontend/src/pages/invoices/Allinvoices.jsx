@@ -56,9 +56,46 @@ const Allinvoices = () => {
     fetchInvoices();
   }, []);
 
-  const handleDelete = async (id) => {};
+  const handleDelete = async (id) => {
+    if(window.confirm("Are you sure you want to delete this Invoice? Once deleted cannot be retrieve again.")){
+      try {
+        await axiosInstance.delete(
+          API_PATHS.INVOICE.DELETE_INVOICE(id)
+        );
+        setInvoices(prev => prev.filter(invoice => invoice._id !== id));
+      } catch (error) {
+        setError("Failed to delete Invoice!")
+        console.error(error);        
+      }
+    }
+  };
 
-  const handleStatusChange = async (invoice) => {};
+  const handleStatusChange = async (invoice) => {
+    setStatusChangeLoading(invoice._id);
+    try {
+      const newStatus = invoice.status === "Paid" ? "Unpaid" : "Paid";
+      const updatedInvoice = {...invoice , status : newStatus};
+  
+      console.log(updatedInvoice);
+      
+      console.log("running... ");
+      
+
+      const response = await axiosInstance.put(
+        API_PATHS.INVOICE.UPDATE_INVOICE(invoice._id),
+        updatedInvoice
+      );
+
+      console.log(response.data.data);
+      
+      setInvoices(prev => prev.map(inv => inv._id === invoice._id ? response.data.data : inv));
+    } catch (error) {
+      setError("Failed to update Invoice");
+      console.error(error);
+    } finally {
+      setStatusChangeLoading(null);
+    }
+  };
 
   const handleOpenReminderModal = (invoiceId) => {
     setSelectedInvoiceId(invoiceId);

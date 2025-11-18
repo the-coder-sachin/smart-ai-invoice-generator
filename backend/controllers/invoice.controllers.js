@@ -153,9 +153,10 @@ export const updateInvoice = async (req, res) => {
       billTo,
       items,
       notes,
+      status,
       paymentTerms,
     } = req.body;
-
+    
     if (!items || !Array.isArray(items) || items.length === 0) {
       return res.status(400).json({
         success: false,
@@ -184,6 +185,7 @@ export const updateInvoice = async (req, res) => {
         billTo,
         items,
         notes,
+        status,
         paymentTerms,
         subTotal,
         taxTotal,
