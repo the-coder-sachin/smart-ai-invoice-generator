@@ -9,7 +9,7 @@ const Button = ({
   ...props
 }) => {
   const baseClasses =
-    "inline-flex items-center justify-center font-medium rounded-lg transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-sky-800 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed";
+    "inline-flex items-center justify-center font-medium rounded-lg transition-colors duration-200 focus:outline-none focus:ring-1 focus:ring-sky-800 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed text-nowrap";
   const variantClasses = {
     primary: "bg-gradient-to-r from-blue-950 to-blue-900 hover:bg-blue-800 text-white",
     secondary:

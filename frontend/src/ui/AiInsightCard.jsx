@@ -16,8 +16,6 @@ const AiInsightCard = () => {
 
         const insights = response?.data?.data?.insights ?? [];
         setInsights(insights);
-
-        console.log(response?.data?.data);
       } catch (error) {
         console.error("Failed fetching Invoices Insights", error);
         setInsights([]);

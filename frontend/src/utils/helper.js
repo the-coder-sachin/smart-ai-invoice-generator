@@ -49,3 +49,24 @@ export const validatePassword = (password) => {
   return { valid: true, message: "" };
 }
 
+export function formatIndianCurrency(num) {
+  if (num === null || num === undefined || isNaN(num)) return "₹0";
+
+  const absNum = Math.abs(num);
+
+  if (absNum >= 1e7) {
+    // 1 Crore+
+    return `₹${(num / 1e7).toFixed(1).replace(/\.0$/, "")}Cr`;
+  } else if (absNum >= 1e5) {
+    // 1 Lakh+
+    return `₹${(num / 1e5).toFixed(1).replace(/\.0$/, "")}L`;
+  } else if (absNum >= 1e3) {
+    // 1 Thousand+
+    return `₹${(num / 1e3).toFixed(1).replace(/\.0$/, "")}k`;
+  }
+
+  // Less than 1000 → normal Indian currency format
+  return `₹${num.toLocaleString("en-IN")}`;
+}
+
+
