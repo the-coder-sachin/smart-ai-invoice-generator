@@ -22,7 +22,7 @@ export const parseInvoiceFromText = async (req, res) => {
     - dueDate
     - billFrom (name, address, email, phone)
     - billTo (name, address, email, phone)
-    - items (description, quantity, unitPrice, taxPercent)
+    - items (name, quantity, unitPrice, taxPercent)
     - notes
     - paymentTerms
 

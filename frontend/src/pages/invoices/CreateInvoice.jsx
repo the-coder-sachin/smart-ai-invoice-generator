@@ -50,18 +50,20 @@ const CreateInvoice = ({ existingInvoice, onSave }) => {
   const [isGeneratingNumber, setIsGeneratingNumber] = useState(
     !existingInvoice
   );
+  
 
   useEffect(() => {
     const aiData = location.state?.aiData;
-
+   
     if (aiData) {
       setFormdata((prev) => ({
         ...prev,
+        invoiceDate: new Date(aiData.invoiceDate).toISOString().split("T")[0],
         billTo: {
-          clientName: aiData.clientName || "",
-          email: aiData.email || "",
-          address: aiData.address || "",
-          phone: "",
+          clientName: aiData.billTo.name || "",
+          email: aiData.billTo.email || "",
+          address: aiData.billTo.address || "",
+          phone: aiData.billTo.phone || "",
         },
         items: aiData.items || [
           {

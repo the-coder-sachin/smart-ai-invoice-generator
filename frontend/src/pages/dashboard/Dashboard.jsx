@@ -1,4 +1,4 @@
-import { DollarSign, File, FileText, Loader, Loader2, Loader2Icon, Plus } from "lucide-react";
+import { DollarSign, File, FileText, IndianRupee, Loader, Loader2, Loader2Icon, Plus } from "lucide-react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +7,7 @@ import { API_PATHS } from "../../utils/apiPaths";
 import Button from "../../ui/Button";
 import AiInsightCard from "../../ui/AiInsightCard";
 import moment from "moment";
+import { formatIndianCurrency } from "../../utils/helper";
 
 const Dashboard = () => {
   const [stats, setStats] = useState({
@@ -60,16 +61,16 @@ const Dashboard = () => {
     },
 
     {
-      icon: DollarSign,
+      icon: IndianRupee,
       label: "Total Paid",
-      value: stats.totalPaid.toFixed(2),
+      value: formatIndianCurrency(stats.totalPaid.toFixed(2)),
       color: "emerald",
     },
 
     {
-      icon: DollarSign,
+      icon: IndianRupee,
       label: "Total Unpaid",
-      value: stats.totalUnpaid.toFixed(2),
+      value: formatIndianCurrency(stats.totalUnpaid.toFixed(2)),
       color: "red",
     },
   ];

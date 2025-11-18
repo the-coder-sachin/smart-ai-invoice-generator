@@ -13,7 +13,6 @@ import {
   Plus,
   Search,
   Sparkles,
-  Trash,
   Trash2,
 } from "lucide-react";
 import Button from "../../ui/Button";

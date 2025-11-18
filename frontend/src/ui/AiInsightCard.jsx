@@ -7,6 +7,7 @@ import { Lightbulb } from "lucide-react";
 const AiInsightCard = () => {
   const [insights, setInsights] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("")
   useEffect(() => {
     const fetchInsights = async () => {
       try {
@@ -18,6 +19,7 @@ const AiInsightCard = () => {
         setInsights(insights);
       } catch (error) {
         console.error("Failed fetching Invoices Insights", error);
+        setErrorMessage(error.response.data.error)
         setInsights([]);
       } finally {
         setLoading(false);
@@ -50,7 +52,7 @@ const AiInsightCard = () => {
       ) : (
         <ul className="list-disc list-inside">
           <li className="text-slate-600 text-sm text-center">
-            No data available to generate Insights!
+            {errorMessage || "No data available to generate Insights!"}
           </li>
         </ul>
       )}
