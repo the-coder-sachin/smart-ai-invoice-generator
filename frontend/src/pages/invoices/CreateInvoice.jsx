@@ -8,7 +8,7 @@ import { API_PATHS } from "../../utils/apiPaths";
 import InputField from "../../ui/InputField";
 import TextAreaField from "../../ui/TextAreaField";
 import Button from "../../ui/Button";
-import { Plus, Trash, Trash2 } from "lucide-react";
+import { Plus, Printer, PrinterCheck, Trash, Trash2 } from "lucide-react";
 import SelectField from "../../ui/SelectField";
 import toast from "react-hot-toast";
 
@@ -184,7 +184,8 @@ const CreateInvoice = ({ existingInvoice, onSave }) => {
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
       <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold text-sky-800">
+        <h2 className="text-xl font-semibold text-sky-800 flex items-center">
+          {existingInvoice ? <PrinterCheck className="w-5 h-5 mr-2"/> : <Printer className="w-5 h-5 mr-2"/>}
           {existingInvoice ? "Edit Invoice" : "Create Invoice"}
         </h2>
         <Button type="submit" isloading={loading || isGeneratingNumber}>
@@ -315,7 +316,7 @@ const CreateInvoice = ({ existingInvoice, onSave }) => {
                 <th className="px-2 sm:px-6 py-3"></th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-sky-100">
+            <tbody className="bg-white divide-y divide-sky-100 text-xs">
               {formdata.items.map((item, index) => (
                 <tr
                   key={index}

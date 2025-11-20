@@ -8,6 +8,7 @@ import {
   AlertCircle,
   Edit,
   FileText,
+  Library,
   Loader2Icon,
   Mail,
   Plus,
@@ -74,19 +75,10 @@ const Allinvoices = () => {
     try {
       const newStatus = invoice.status === "Paid" ? "Unpaid" : "Paid";
       const updatedInvoice = {...invoice , status : newStatus};
-  
-      console.log(updatedInvoice);
-      
-      console.log("running... ");
-      
-
       const response = await axiosInstance.put(
         API_PATHS.INVOICE.UPDATE_INVOICE(invoice._id),
         updatedInvoice
       );
-
-      console.log(response.data.data);
-      
       setInvoices(prev => prev.map(inv => inv._id === invoice._id ? response.data.data : inv));
     } catch (error) {
       setError("Failed to update Invoice");
@@ -137,7 +129,9 @@ const Allinvoices = () => {
       />
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
         <div>
-          <h1 className="text-2xl font-semibold text-sky-800 ">All Invoices</h1>
+          <h1 className="text-2xl font-semibold text-sky-800 flex items-center">
+            <Library className="w-5 h-5 mr-2"/>
+            All Invoices</h1>
           <p className="text-sm text-slate-600 mt-1">
             Manage all your Invoices at one place.
           </p>

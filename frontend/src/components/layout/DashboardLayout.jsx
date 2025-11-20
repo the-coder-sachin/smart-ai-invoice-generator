@@ -13,13 +13,13 @@ const NavigationItem = ({ item, isActive, onClick, isCollapsed }) => {
       onClick={() => onClick(item.id)}
       className={`w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-all duration-300 group ${
         isActive
-          ? "bg-sky-100 text-blue-800 shadow-sm shadow-blue-50"
+          ? "bg-sky-100 text-sky-800 shadow-sm shadow-blue-50"
           : "text-gray-600 hover:bg-sky-50 hover:text-gray-900"
       }`}
     >
       <Icon
         className={`h-5 w-5 flex-shrink-0 ${
-          isActive ? "text-blue-900" : "text-gray-500"
+          isActive ? "text-sky-800" : "text-gray-600 hover:text-gray-900"
         }`}
       />
       {!isCollapsed && <span className="ml-3 truncate">{item.name}</span>}
@@ -152,7 +152,7 @@ const DashboardLayout = ({ children, activeMenu }) => {
               {isMobile && (
                 <button
                   onClick={toggleSidebar}
-                  className="p-2 rounded-xl hover:bg-gray-100 transition-colors duration-300 "
+                  className="p-2 rounded-xl hover:bg-sky-200 transition-colors duration-300 "
                 >
                   {sidebarOpen ? (
                     <X className="w-5 h-5 text-gray-600" />

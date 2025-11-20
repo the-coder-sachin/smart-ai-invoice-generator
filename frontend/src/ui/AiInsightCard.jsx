@@ -8,26 +8,42 @@ const AiInsightCard = () => {
   const [insights, setInsights] = useState([]);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("")
-  useEffect(() => {
-    const fetchInsights = async () => {
-      try {
-        const response = await axiosInstance.get(
-          API_PATHS.AI.GET_DASHBOARD_SUMMARY
-        );
+useEffect(() => {
+  // 1️⃣ Check cached insights
+  const cachedInsights = localStorage.getItem("dashboardInsights");
 
-        const insights = response?.data?.data?.insights ?? [];
-        setInsights(insights);
-      } catch (error) {
-        console.error("Failed fetching Invoices Insights", error);
-        setErrorMessage(error.response.data.error)
-        setInsights([]);
-      } finally {
-        setLoading(false);
-      }
-    };
+  if (cachedInsights) {
+    setInsights(JSON.parse(cachedInsights));
+    setLoading(false);
+    return; // ⛔ API call skip
+  }
 
-    fetchInsights();
-  }, []);
+  // 2️⃣ No cached data → Fetch API
+  const fetchInsights = async () => {
+    try {
+      const response = await axiosInstance.get(
+        API_PATHS.AI.GET_DASHBOARD_SUMMARY
+      );
+
+      const insights = response?.data?.data?.insights ?? [];
+
+      // Save to state
+      setInsights(insights);
+
+      // Save to cache
+      localStorage.setItem("dashboardInsights", JSON.stringify(insights));
+    } catch (error) {
+      console.error("Failed fetching Invoices Insights", error);
+      setErrorMessage(error?.response?.data?.error || "Something went wrong");
+      setInsights([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchInsights();
+}, []);
+
 
   return (
     <div className="bg-white p-4 rounded-xl border border-sky-200 shadow-sm shadow-sky-100">

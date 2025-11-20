@@ -19,12 +19,11 @@ const CreateWithAiModal = ({isOpen, onClose}) => {
     }
     setLoading(true);
     try {
-      const response = axiosInstance.post(
+      const response = await axiosInstance.post(
         API_PATHS.AI.PARSE_INVOICE_TEXT, 
         {text}
       );
-      const invoiceData = await response.data;
-      console.log(invoiceData);
+      const invoiceData = response.data;
       if(invoiceData){
         toast.success("Invoice data extracted successfully!");
         onClose();
@@ -32,11 +31,12 @@ const CreateWithAiModal = ({isOpen, onClose}) => {
         navigate("/invoices/new", { state : { aiData : invoiceData}})
         setText("")
       } else {
+             
         toast.error("Failed to Invoice from Text. Please try again later.", error.message)
       }
     } catch (error) {
       toast.error("Failed to Invoice from Text. Please try again later.")
-      console.error("AI parsing error: ", error)
+      console.error("AI parsing error: ", error )
     } finally {
       setLoading(false);
     }
