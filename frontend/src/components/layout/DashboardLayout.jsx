@@ -33,7 +33,6 @@ const DashboardLayout = ({ children, activeMenu }) => {
   const location = useLocation();
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [activeNavItem, setActiveNavItem] = useState(activeMenu || "dashboard");
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -68,7 +67,6 @@ const DashboardLayout = ({ children, activeMenu }) => {
   }, [isProfileDropdownOpen]);
 
   const handleNavigation = (itemId) => {
-    setActiveNavItem(itemId);
     navigate(`/${itemId}`);
     if (isMobile) {
       setSidebarOpen(false);
@@ -179,7 +177,7 @@ const DashboardLayout = ({ children, activeMenu }) => {
                 setIsProfileDropdownOpen(prev=>!prev)
               }}
               avatar={user?.avatar || ""}
-              companyName={user?.companyName || ""}
+              companyName={user?.name || ""}
               email={user?.email || ""}
               logout={logout}
               />

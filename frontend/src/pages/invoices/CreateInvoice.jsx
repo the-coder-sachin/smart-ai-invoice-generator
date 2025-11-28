@@ -24,7 +24,7 @@ const CreateInvoice = ({ existingInvoice, onSave }) => {
       billFrom: {
         businessName: user?.businessName || "",
         email: user?.email || "",
-        address: user?.phone || "",
+        address: user?.address || "",
         phone: user?.phone || "",
       },
       billTo: {
