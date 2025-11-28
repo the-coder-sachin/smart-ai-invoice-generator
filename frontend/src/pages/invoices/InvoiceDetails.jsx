@@ -260,6 +260,35 @@ const InvoiceDetails = () => {
           )}
         </div>
       </div>
+
+      <style>
+        {`
+        @page {
+          padding: 10px;
+        }
+        @media print {
+          body {
+            visibility: hidden;
+          }
+          #invoice-content-wrapper, #invoice-content-wrapper * {
+            visibility: visible;
+          } 
+          #invoice-content-wrapper {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            width: 100%;
+          } 
+          #invoice-preview {
+            box-shadow: none;
+            border: none;
+            border-radius: 0;
+            padding: 0;
+          }    
+        }  
+        `}
+      </style>
     </>
   );
 }
