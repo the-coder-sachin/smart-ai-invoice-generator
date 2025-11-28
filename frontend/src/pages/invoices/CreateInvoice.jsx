@@ -189,7 +189,7 @@ const CreateInvoice = ({ existingInvoice, onSave }) => {
           {existingInvoice ? "Edit Invoice" : "Create Invoice"}
         </h2>
         <Button type="submit" isloading={loading || isGeneratingNumber}>
-          {existingInvoice ? "Save Changes" : "Save Invoice"}
+          {existingInvoice ? "Update Invoice" : "Save Invoice"}
         </Button>
       </div>
 

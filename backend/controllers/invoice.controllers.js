@@ -116,7 +116,8 @@ export const getInvoiceById = async (req, res) => {
     }
     
     // check if user is authorized to access the invoice
-    if(invoice.user.toString !== req.user.id){
+    if(invoice.user._id.toString() !== req.user.id){
+      
         return res.status(404).json({
         success: false,
         message: "Not authorized",
@@ -156,7 +157,7 @@ export const updateInvoice = async (req, res) => {
       status,
       paymentTerms,
     } = req.body;
-    
+
     if (!items || !Array.isArray(items) || items.length === 0) {
       return res.status(400).json({
         success: false,

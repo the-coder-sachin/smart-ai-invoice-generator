@@ -129,7 +129,7 @@ const Allinvoices = () => {
       />
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
         <div>
-          <h1 className="text-2xl font-semibold text-sky-800 flex items-center">
+          <h1 className="text-xl font-semibold text-sky-800 flex items-center">
             <Library className="w-5 h-5 mr-2"/>
             All Invoices</h1>
           <p className="text-sm text-slate-600 mt-1">
@@ -295,7 +295,7 @@ const Allinvoices = () => {
                         <Button
                           size="small"
                           variant="ghost"
-                          onClick={() => navigate(`/invoices/${invoice._id}`)}
+                          onClick={() => navigate(`/invoices/${invoice._id}`,{state : { existingInvoice : invoice }})}
                         >
                           <Edit className="w-4 h-4" />
                         </Button>
