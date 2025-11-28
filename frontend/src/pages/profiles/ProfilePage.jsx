@@ -1,9 +1,140 @@
-import React from 'react'
+import { useEffect, useState } from "react";
+import { useAuth } from "../../context/AuthContext"
+import { Building, Building2, Loader2, Mail, MapIcon, MapPin, MapPinCheck, Phone, User, User2 } from "lucide-react";
+import InputField from "../../ui/InputField";
+import TextAreaField from "../../ui/TextAreaField";
+import axiosInstance from "../../utils/axiosInstance";
+import { API_PATHS } from "../../utils/apiPaths";
+import toast from "react-hot-toast";
 
 const ProfilePage = () => {
-  return (
-    <div>ProfilePage</div> 
+  const {user, loading, updateUser} = useAuth();
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    businessName: "",
+    address: "",
+    phone: "",
+  });
+
+  useEffect(()=>{
+    if(user){
+      setFormData({
+        name: user.name || "",
+        businessName: user.businessName || "",
+        address: user.address || "",
+        phone: user.phone || "",
+      })
+    }
+  },[user]);
+
+  const handleInputChange = (e) => {
+    const {name , value} = e.target;
+    setFormData(prev => ({...prev, [name]:value}));
+  };
+
+  const handleUpdateProfile = async (e) => {
+    e.preventDefault();
+    setIsUpdating(true);
+    try {
+      const response = await axiosInstance.put(API_PATHS.AUTH.UPDATE_PROFILE, formData );
+      updateUser(response.data);
+      toast.success("Profile updated successfully!")
+    } catch (error) {
+      toast.error("Failed to update profile.");
+      console.error(error)
+    } finally {
+      setIsUpdating(false);
+    }
+  };
+
+  if(loading) return (
+    <div className="flex items-center justify-center h-64">
+      <Loader2 className="h-8 w-8 animate-spin" />
+    </div>
   )
+
+  return (
+    <div className="bg-white border border-sky-200 rounded-lg shadow-sm overflow-hidden max-w-4xl mx-auto">
+      <div className="px-6 py-4 border-b border-sky-200 bg-sky-50">
+        <h3 className="text-lg font-semibold text-sky-800 flex items-center">
+          <User className="h-5 w-5 mr-2" />
+          My Profile
+        </h3>
+      </div>
+      <form onSubmit={handleUpdateProfile}>
+        <div className="p-6 space-y-6">
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-2">Email Address</label>
+            <div className="relative">
+              <div className="absolute inset-0 left-0 pl-3 flex items-center pointer-events-none">
+                <Mail className="w-5 h-5 text-slate-400" />
+              </div>
+              <input
+                type="email"
+                name="email"
+                readOnly
+                value={user?.email || ""}
+                className="w-full h-10 pl-10 pr-3 py-2 border border-slate-200 rounded-lg bg-slate-50 text-slate-500 disabled:cursor-not-allowed"
+                disabled
+              />
+            </div>
+          </div>
+          <InputField
+            label={"Full Name"}
+            name={"name"}
+            icon={User}
+            type="text"
+            value={formData.name}
+            onChange={handleInputChange}
+            placeholder="Enter your Full Name"
+          />
+
+          <div className="pt-6 border-t border-sky-200 ">
+            <h4 className="text-lg font-medium text-slate-900">Business Information</h4>
+            <p className="text-slate-500 text-sm mt-1 mb-4">
+              This will be used to pre-fill the "Bill From" section of your
+              Invoice.
+            </p>
+            <div className="space-y-4">
+              <InputField
+                label={"Business Name"}
+                name={"businessName"}
+                icon={Building}
+                type="text"
+                value={formData.businessName}
+                onChange={handleInputChange}
+                placeholder="Your Company LLC"
+              />
+              <TextAreaField
+                label={"Address"}
+                name={"address"}
+                icon={MapPin}
+                value={formData.address}
+                onChange={handleInputChange}
+                placeholder="Enter your Address"
+              />
+              <InputField
+                label={"Phone"}
+                name={"phone"}
+                icon={Phone}
+                type="tel"
+                value={formData.phone}
+                onChange={handleInputChange}
+                placeholder="Enter your Phone"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="px-6 py-4 bg-sky-50 border-t border-sky-200 flex justify-end">
+          <button type="submit" disabled={isUpdating} className="inline-flex items-center justify-center px-4 py-2 h-10 bg-gradient-to-br from-blue-950 to-blue-900 text-white font-medium text-sm rounded-lg transition-colors duration-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed">
+            {isUpdating ? <Loader2 className="w-5 h-5 animate-spin mr-2" /> : null}
+            {isUpdating ? "Saving..." : "Save Changes"}
+          </button>
+        </div>
+      </form>
+    </div>
+  );
 }
 
 export default ProfilePage
