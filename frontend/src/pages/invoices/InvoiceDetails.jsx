@@ -165,7 +165,7 @@ const InvoiceDetails = () => {
                 Bill To
               </h3>
               <p className="font-semibold text-slate-800">
-                {invoice.billTo.ClientName}
+                {invoice.billTo.clientName}
               </p>
               <p className="text-slate-600">{invoice.billTo.address}</p>
               <p className="text-slate-600">{invoice.billTo.email}</p>
