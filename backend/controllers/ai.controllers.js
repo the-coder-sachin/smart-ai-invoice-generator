@@ -103,7 +103,7 @@ export const getReminderEmail = async (req, res) => {
     });
 
     res.status(200).json({
-        reminderText: response.text,
+      reminderText: response.text,
     });
   } catch (err) {
     console.error("Email generation error:", err);
@@ -115,10 +115,10 @@ export const getDashboardSummary = async (req, res) => {
   try {
     const invoices = await Invoice.find({ user: req.user.id });
 
-    if (!invoices || !Array.isArray(invoices) || invoices.length === 0) {    
-      return res
-        .status(400)
-        .json({ message: "Invalid or missing 'invoices' array in request body" });
+    if (!invoices || !Array.isArray(invoices) || invoices.length === 0) {
+      return res.status(400).json({
+        message: "Invalid or missing 'invoices' array in request body",
+      });
     }
 
     const totalInvoices = invoices.length;

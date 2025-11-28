@@ -114,16 +114,14 @@ export const getInvoiceById = async (req, res) => {
         data: null,
       });
     }
-    
+
     // check if user is authorized to access the invoice
-    if(invoice.user._id.toString() !== req.user.id){
-      
-        return res.status(404).json({
+    if (invoice.user._id.toString() !== req.user.id) {
+      return res.status(404).json({
         success: false,
         message: "Not authorized",
         data: null,
-        });
-
+      });
     }
 
     res.status(200).json({
