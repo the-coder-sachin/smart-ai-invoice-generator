@@ -62,7 +62,7 @@ const Header = () => {
             <div className="w-8 h-8 flex items-center justify-center">
               <img src="/logo.png" className="text-white w-8 h-8 object-cover" />
             </div>
-            <span className="text-xl text-gray-900 font-bold">
+            <span className="text-xl text-gray-900 font-bold text-nowrap">
               Smart AI Invoice
             </span>
           </Link>
@@ -105,13 +105,13 @@ const Header = () => {
               <>
                 <Link
                   to={"/login"}
-                  className="text-black hover:text-gray-800 font-medium transition-colors duration-200"
+                  className="hidden lg:block text-black hover:text-gray-800 font-medium transition-colors duration-200"
                 >
                   Login
                 </Link>
                 <Link
                   to={"/signup"}
-                  className="bg-gradient-to-r from-blue-950 to-blue-900 text-white hover:bg-gray-900 px-6 py-2.5 rounded-lg font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95"
+                  className="hidden lg:block bg-gradient-to-r from-blue-950 to-blue-900 text-white hover:bg-gray-900 px-6 py-2.5 rounded-lg font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95"
                 >
                   Sign Up
                 </Link>

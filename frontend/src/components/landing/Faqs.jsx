@@ -17,7 +17,7 @@ const Faqs = () => {
                 <h2 className="text-3xl sm:text-4xl mb-4 font-extrabold text-gray-900" >Frequently Asked Questions</h2>
                 <p className="text-xl max-w-3xl mx-auto text-gray-600">Everything you need to know about the product and billing</p>
             </div>
-            <div className="space-y-4">
+            <div className="space-y-4 p-6">
                 {FAQS.map((faq, index)=> (
                     <FaqItem 
                     key={index}

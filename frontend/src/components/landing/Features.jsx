@@ -13,7 +13,7 @@ const Features = () => {
             Everything you need to <span className="text-green-700 font-semibold">manage invoicing</span> and get paid.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-6">
           {FEATURES.map((feature, index) => (
             <div
               key={index}
